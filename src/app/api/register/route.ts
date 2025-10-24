@@ -271,24 +271,11 @@ export async function POST(req: NextRequest) {
 
       // 保存配置
       try {
-        const saveResponse = await fetch(
-          `${req.nextUrl.origin}/api/admin/config`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(config),
-          }
-        );
-
-        if (!saveResponse.ok) {
-          console.error('保存用户配置失败');
-          // 不影响注册流程，只记录日志
-        }
+        await db.saveAdminConfig(config);
+        console.log(`用户配置已更新，添加用户: ${username}`);
       } catch (error) {
         console.error('保存用户配置异常:', error);
-        // 不影响注册流程
+        // 不影响注册流程，但记录错误
       }
     }
 
