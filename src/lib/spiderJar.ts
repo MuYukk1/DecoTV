@@ -19,6 +19,7 @@ const DOMESTIC_CANDIDATES: string[] = [
 
 const INTERNATIONAL_CANDIDATES: string[] = [
   // 国际源（GitHub 和全球 CDN）
+  'https://ghfast.top/https://raw.githubusercontent.com/FongMi/CatVodSpider/main/jar/custom_spider.jar',
   'https://raw.githubusercontent.com/FongMi/CatVodSpider/main/jar/custom_spider.jar',
   'https://raw.gitmirror.com/FongMi/CatVodSpider/main/jar/custom_spider.jar',
   'https://ghproxy.cc/https://raw.githubusercontent.com/FongMi/CatVodSpider/main/jar/custom_spider.jar',
