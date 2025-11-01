@@ -14,7 +14,7 @@ const DOMESTIC_CANDIDATES: string[] = [
   'https://agit.ai/Yoursmile7/TVBox/raw/branch/master/jar/custom_spider.jar',
   'https://ghproxy.net/https://raw.githubusercontent.com/FongMi/CatVodSpider/main/jar/custom_spider.jar',
   'https://mirror.ghproxy.com/https://raw.githubusercontent.com/FongMi/CatVodSpider/main/jar/custom_spider.jar',
-  'https://ghfast.top/https://raw.githubusercontent.com/FongMi/CatVodSpider/main/jar/custom_spider.jar',
+  'http://ghfast.top/https://raw.githubusercontent.com/FongMi/CatVodSpider/main/jar/custom_spider.jar',
 ];
 
 const INTERNATIONAL_CANDIDATES: string[] = [
