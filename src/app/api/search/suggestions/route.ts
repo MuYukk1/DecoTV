@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
     const suggestions = await generateSuggestions(
       config,
       query,
-      authInfo.username,
+      authInfo.username
     );
 
     // 从配置中获取缓存时间，如果没有配置则使用默认值300秒（5分钟）
@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
 async function generateSuggestions(
   config: AdminConfig,
   query: string,
-  username: string,
+  username: string
 ): Promise<
   Array<{
     text: string;
@@ -79,13 +79,16 @@ async function generateSuggestions(
     realKeywords = Array.from(
       new Set(
         results
-          .filter(
-            (r: any) =>
-              config.SiteConfig.DisableYellowFilter ||
-              !yellowWords.some((word: string) =>
-                (r.type_name || '').includes(word),
-              ),
-          )
+          .filter((r: any) => {
+            // 成人内容过滤
+            if (!config.SiteConfig.DisableYellowFilter) {
+              if (firstSite.is_adult) return false;
+              const typeName = r.type_name || '';
+              if (yellowWords.some((word: string) => typeName.includes(word)))
+                return false;
+            }
+            return true;
+          })
           .map((r: any) => r.title)
           .filter(Boolean)
           .flatMap((title: string) => title.split(/[ -:：·、-]/))
