@@ -9,6 +9,8 @@ import { searchFromApi } from '@/lib/downstream';
 import { yellowWords } from '@/lib/yellow';
 
 export const runtime = 'nodejs';
+// 此路由会读取请求中的 cookie（用于鉴权），因此需要显式声明为动态路由
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
   try {
@@ -30,7 +32,7 @@ export async function GET(request: NextRequest) {
     const suggestions = await generateSuggestions(
       config,
       query,
-      authInfo.username
+      authInfo.username,
     );
 
     // 从配置中获取缓存时间，如果没有配置则使用默认值300秒（5分钟）
@@ -45,7 +47,7 @@ export async function GET(request: NextRequest) {
           'Vercel-CDN-Cache-Control': `public, s-maxage=${cacheTime}`,
           'Netlify-Vary': 'query',
         },
-      }
+      },
     );
   } catch (error) {
     console.error('获取搜索建议失败', error);
@@ -56,7 +58,7 @@ export async function GET(request: NextRequest) {
 async function generateSuggestions(
   config: AdminConfig,
   query: string,
-  username: string
+  username: string,
 ): Promise<
   Array<{
     text: string;
@@ -91,9 +93,9 @@ async function generateSuggestions(
           .filter(Boolean)
           .flatMap((title: string) => title.split(/[ -:：·、-]/))
           .filter(
-            (w: string) => w.length > 1 && w.toLowerCase().includes(queryLower)
-          )
-      )
+            (w: string) => w.length > 1 && w.toLowerCase().includes(queryLower),
+          ),
+      ),
     ).slice(0, 8);
   }
 
