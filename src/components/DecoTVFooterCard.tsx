@@ -10,7 +10,7 @@ const DecoTVFooterCard = () => {
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     const element = document.getElementById('deco-footer-card');
@@ -56,7 +56,7 @@ const DecoTVFooterCard = () => {
             <div className='mb-6 sm:mb-8'>
               <h2 className='text-4xl sm:text-6xl lg:text-7xl font-black tracking-wider relative'>
                 <span className='bg-gradient-to-r from-cyan-300 via-purple-400 to-pink-400 bg-clip-text text-transparent relative drop-shadow-2xl'>
-                  DecoTV
+                  {process.env.NEXT_PUBLIC_SITE_NAME || 'DecoTV'}
                 </span>
                 {/* 背景文字增强可读性 */}
                 <span className='absolute inset-0 text-white/10 blur-sm font-black tracking-wider'>

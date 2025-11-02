@@ -157,7 +157,7 @@ function HomeClient() {
       'favoritesUpdated',
       (newFavorites: Record<string, any>) => {
         updateFavoriteItems(newFavorites);
-      }
+      },
     );
 
     return unsubscribe;
@@ -177,7 +177,7 @@ function HomeClient() {
             <div className='mx-auto w-full px-4'>
               <div className='inline-block rounded-3xl px-6 py-4 glass-card'>
                 <div className='text-4xl sm:text-6xl font-extrabold tracking-tight neon-text'>
-                  DecoTV
+                  {process.env.NEXT_PUBLIC_SITE_NAME || 'DecoTV'}
                 </div>
                 <div className='mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-300'>
                   发现、收藏、继续观看
@@ -385,12 +385,12 @@ function HomeClient() {
                         // 找到当前星期对应的番剧数据
                         const todayAnimes =
                           bangumiCalendarData.find(
-                            (item) => item.weekday.en === currentWeekday
+                            (item) => item.weekday.en === currentWeekday,
                           )?.items || [];
 
                         // 过滤掉无效数据
                         const validAnimes = todayAnimes.filter(
-                          (anime) => anime && anime.id
+                          (anime) => anime && anime.id,
                         );
 
                         return validAnimes.map((anime, index) => (
